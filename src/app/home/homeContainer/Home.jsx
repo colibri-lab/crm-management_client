@@ -80,7 +80,7 @@ function Home({ isAuth }) {
     const handleDrawerClose = () => {
         setOpen(false);
     };
-    // if (!isAuth) return <Redirect to="/login" />
+    if (!isAuth) return <Redirect to="/login" />
     console.log('classes', classes)
     console.log('theme', theme)
     return (
