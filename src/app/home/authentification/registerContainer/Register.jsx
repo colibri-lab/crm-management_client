@@ -1,7 +1,7 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
 import TextField from '@material-ui/core/TextField'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
 import { Field } from 'redux-form'
 import "./register.scss"
 
@@ -24,12 +24,17 @@ const validate = values => {
         'firstName',
         'lastName',
         'email',
-        'userName',
+        'username',
         'password',
+        'confirmPassword'
     ]
     requiredFields.forEach(field => {
         if (!values[field]) {
             errors[field] = 'Required'
+        }
+        if ((values['password']) && (values['password'] !== values['confirmPassword'])) {
+            // errors['password'] = 'Passwords don\'t match!'
+            errors['confirmPassword'] = 'Passwords don\'t match!!'
         }
     })
     if (
@@ -50,6 +55,7 @@ const renderTextField = ({
         <TextField
             label={label}
             placeholder={label}
+            variant="outlined"
             error={touched && invalid}
             helperText={touched && error}
             {...input}
@@ -58,28 +64,33 @@ const renderTextField = ({
     )
 
 const Login = props => {
-    const { handleSubmit, pristine, reset, submitting } = props
+    const { handleSubmit, pristine, reset, submitting, users, isAuth } = props
+    if (props.isAuth) return <Redirect to="/" />
     return (
         <div className="register-container">
             <div className="content">
+                <h1>Accaunt Register</h1>
                 <form onSubmit={handleSubmit}>
-                    <div>
+                    <div className="field-content">
                         <Field className="input-field" name="firstName" component={renderTextField} label="First Name" />
                     </div>
-                    <div>
+                    <div className="field-content">
                         <Field className="input-field" name="lastName" component={renderTextField} label="Last Name" />
                     </div>
-                    <div>
+                    <div className="field-content">
                         <Field className="input-field" name="email" component={renderTextField} label="Email" />
                     </div>
-                    <div>
+                    <div className="field-content">
                         <Field className="input-field" name="username" component={renderTextField} label="User Name" />
                     </div>
-                    <div>
+                    <div className="field-content">
                         <Field className="input-field" name="password" component={renderTextField} label="Password" type="password" />
                     </div>
+                    <div className="field-content">
+                        <Field className="input-field" name="confirmPassword" component={renderTextField} label="Confirm Password" type="password" />
+                    </div>
                     <div />
-                    <div>
+                    <div className="button-content">
                         <button type="submit" disabled={pristine || submitting}>Submit</button>
                         <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
                     </div>

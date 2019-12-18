@@ -1,12 +1,11 @@
 import React from 'react'
 import Login from './Login'
 import { connect } from 'react-redux'
-import { setLoginParams } from '../duck/operations'
+import { setLoginParams } from '../@duck/operations'
 import { Redirect } from 'react-router-dom'
 
 function LoginContainer(props) {
     const onSubmit = formData => {
-        console.log(props)
         const { userName: u, password: p } = formData
         props.setLoginParams(u, p)
     }

@@ -4,11 +4,17 @@ const instance = axios.create({
     baseURL: 'https://crm-management.herokuapp.com/',
 });
 
-export const loginization = (username, password) => {
-    return instance.post("users/login", { username, password });
+export const home = {
+    getUsers() {
+        return instance.get("users");
+    }
 }
 
-export const registration = (payload) => {
-    debugger
-    return instance.post("users", payload);
+export const auth = {
+    loginization(username, password) {
+        return instance.post("users/login", { username, password });
+    },
+    registration(payload) {
+        return instance.post("users", payload);
+    }
 }

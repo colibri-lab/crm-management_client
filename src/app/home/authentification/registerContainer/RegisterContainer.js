@@ -1,7 +1,7 @@
 import React from 'react'
 import Register from './Register'
 import { connect } from 'react-redux'
-import { setRegisterParams } from '../duck/operations'
+import { setRegisterParams } from '../@duck/operations'
 
 function RegisterContainer(props) {
     const onSubmit = formData => {
@@ -16,6 +16,8 @@ function RegisterContainer(props) {
 }
 
 const mapStateToProps = state => ({
+    users: state.home.users,
+    isAush: state.loginPage.isAush
 })
 
 export default connect(mapStateToProps, { setRegisterParams })(RegisterContainer)

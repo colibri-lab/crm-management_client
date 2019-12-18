@@ -5,22 +5,55 @@ $pageHeight: '100vh';
     justify-content: center;
     align-items: center;
     height: 100vh;
-
+    background-color: #E5E3FF;
+    ::placeholder {
+        font-size: 15px ;
+      }
+    .MuiInputLabel-outlined {
+        font-size: 15px;
+        transform: translate(14px, 14px) scale(1);
+    }
+    .MuiOutlinedInput-input {
+        padding: 12px 14px;
+    }
     .content{
-    padding: 20px;
     width: 350px;
     display: flex;
     flex-direction:column;
     align-items: center;
+    height: max-content;
+    background-color: rgb(245, 235, 235);
+    padding: 20px 25px;
     }
     .input-field{
         width: 350px;
+        margin-top: 5px;
     }
+    .button-content{
+        display: flex;
+        flex-direction: column;
+        button{
+            margin: 5px 0;
+            height: 40px;
+            font-size: 15px;
+            color: #fff;
+            background-color: #3F51B5;
+            font-weight: bold;
+        }
+            :hover{
+                background-color: rgb(85, 99, 177);
+                cursor: pointer;
+            }
+    }   
     .checkbox-field{
         width: 20px;
     height: 20px;
     margin: 10px 0;
     }
+    .field-content{
+        margin:10px 0 ;
+    }
+    
 }
 .home-container{
     display: flex;

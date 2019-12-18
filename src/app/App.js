@@ -1,27 +1,34 @@
-import React from "react";
+import React, { useEffect, memo } from "react";
 import { BrowserRouter } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import { store } from "../reducers";
 import { Switch, Route } from "react-router-dom";
 import Home from "./home/homeContainer/Home";
 import NotFound from "./home/NotFound/NotFound";
 import LoginContainer from "./home/authentification/loginContainer/LoginContainer";
 import RegisterContainer from "./home/authentification/registerContainer/RegisterContainer";
+import { connect } from 'react-redux'
+import { getUsers } from './home/@duck/operations'
+import { compose } from "redux";
 
 
-const App = () => {
+const App = ({ getUsers, users }) => {
+  useEffect(() => {
+    getUsers()
+  }, [])
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/login" component={LoginContainer} />
-          <Route path="/register" component={RegisterContainer} />
-          <Route component={NotFound} />
-        </Switch>
-      </BrowserRouter>
-    </Provider>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/login" component={LoginContainer} />
+        <Route path="/register" component={RegisterContainer} />
+        <Route component={NotFound} />
+      </Switch>
+    </BrowserRouter>
   );
 }
-
-export default App
+const mapStateToProps = state => ({
+  users: state.home.users
+})
+export default compose(
+  connect(mapStateToProps, { getUsers }),
+  memo
+)(App)
