@@ -1,4 +1,4 @@
-import React, { useEffect, memo } from "react";
+import React, { memo } from "react";
 import { BrowserRouter } from 'react-router-dom'
 import { Switch, Route } from "react-router-dom";
 import Home from "./home/homeContainer/Home";
@@ -10,10 +10,8 @@ import { getUsers } from './home/@duck/operations'
 import { compose } from "redux";
 
 
-const App = ({ getUsers, users }) => {
-  useEffect(() => {
-    getUsers()
-  }, [])
+const App = () => {
+
   return (
     <BrowserRouter>
       <Switch>
