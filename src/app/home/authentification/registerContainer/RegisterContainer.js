@@ -17,7 +17,7 @@ function RegisterContainer(props) {
 
 const mapStateToProps = state => ({
     users: state.home.users,
-    isAush: state.loginPage.isAush
+    isAuth: state.loginPage.isAuth
 })
 
 export default connect(mapStateToProps, { setRegisterParams })(RegisterContainer)
